@@ -9,6 +9,10 @@ const Dashboard = () => {
   const [clients, setClients] = useState([]);
   const [projects, setProjects] = useState([]);
 
+  // 🔍 NEW STATES
+  const [searchClient, setSearchClient] = useState("");
+  const [searchProject, setSearchProject] = useState("");
+
   useEffect(() => {
     fetchDashboard();
   }, []);
@@ -20,6 +24,15 @@ const Dashboard = () => {
     setProjects(res.data.projects);
   };
 
+  // 🔍 FILTER LOGIC
+  const filteredClients = clients.filter((c) =>
+    c.name.toLowerCase().includes(searchClient.toLowerCase())
+  );
+
+  const filteredProjects = projects.filter((p) =>
+    p.title.toLowerCase().includes(searchProject.toLowerCase())
+  );
+
   return (
     <div className="flex bg-gray-300 min-h-screen">
       
@@ -29,31 +42,61 @@ const Dashboard = () => {
         
         <Navbar />
 
-        {/* Stats Cards */}
-        <div className="grid grid-cols-3 gap-6 mt-6">
+        {/* ✅ Stats Cards (Responsive Fix) */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
           <StatsCard title="Total Clients" value={stats.clients} />
           <StatsCard title="Active Projects" value={stats.active} />
           <StatsCard title="Completed Projects" value={stats.completed} />
         </div>
 
-        {/* Recent Clients */}
+        {/* 🔍 Recent Clients */}
         <div className="bg-gray-50 mt-8 p-5 rounded-xl shadow-md">
-          <h2 className="text-lg font-bold mb-4">Recent Clients</h2>
+          <div className="flex flex-col md:flex-row justify-between items-center mb-4 gap-3">
+            <h2 className="text-lg font-bold">Recent Clients</h2>
 
-          {clients.map((c) => (
-            <p key={c._id} className="border-b py-2">{c.name}</p>
-          ))}
+            <input
+              type="text"
+              placeholder="Search client..."
+              value={searchClient}
+              onChange={(e) => setSearchClient(e.target.value)}
+              className="border p-2 rounded w-full md:w-56"
+            />
+          </div>
+
+          {filteredClients.length > 0 ? (
+            filteredClients.map((c) => (
+              <p key={c._id} className="border-b py-2">
+                {c.name}
+              </p>
+            ))
+          ) : (
+            <p className="text-sm text-gray-500">No client found</p>
+          )}
         </div>
 
-        {/* Recent Projects */}
+        {/* 🔍 Recent Projects */}
         <div className="bg-white mt-8 p-5 rounded shadow">
-          <h2 className="text-lg font-bold mb-4">Recent Projects</h2>
+          <div className="flex flex-col md:flex-row justify-between items-center mb-4 gap-3">
+            <h2 className="text-lg font-bold">Recent Projects</h2>
 
-          {projects.map((p) => (
-            <p key={p._id} className="border-b py-2">
-              {p.title} - {p.status}
-            </p>
-          ))}
+            <input
+              type="text"
+              placeholder="Search project..."
+              value={searchProject}
+              onChange={(e) => setSearchProject(e.target.value)}
+              className="border p-2 rounded w-full md:w-56"
+            />
+          </div>
+
+          {filteredProjects.length > 0 ? (
+            filteredProjects.map((p) => (
+              <p key={p._id} className="border-b py-2">
+                {p.title} - {p.status}
+              </p>
+            ))
+          ) : (
+            <p className="text-sm text-gray-500">No project found</p>
+          )}
         </div>
 
       </div>
