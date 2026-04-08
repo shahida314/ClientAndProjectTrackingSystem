@@ -9,7 +9,7 @@ const Dashboard = () => {
   const [clients, setClients] = useState([]);
   const [projects, setProjects] = useState([]);
 
-  // 🔍 NEW STATES
+  
   const [searchClient, setSearchClient] = useState("");
   const [searchProject, setSearchProject] = useState("");
 
@@ -24,7 +24,7 @@ const Dashboard = () => {
     setProjects(res.data.projects);
   };
 
-  // 🔍 FILTER LOGIC
+  
   const filteredClients = clients.filter((c) =>
     c.name.toLowerCase().includes(searchClient.toLowerCase())
   );
@@ -42,14 +42,14 @@ const Dashboard = () => {
         
         <Navbar />
 
-        {/* ✅ Stats Cards (Responsive Fix) */}
+    
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
           <StatsCard title="Total Clients" value={stats.clients} />
           <StatsCard title="Active Projects" value={stats.active} />
           <StatsCard title="Completed Projects" value={stats.completed} />
         </div>
 
-        {/* 🔍 Recent Clients */}
+        
         <div className="bg-gray-50 mt-8 p-5 rounded-xl shadow-md">
           <div className="flex flex-col md:flex-row justify-between items-center mb-4 gap-3">
             <h2 className="text-lg font-bold">Recent Clients</h2>
@@ -74,7 +74,7 @@ const Dashboard = () => {
           )}
         </div>
 
-        {/* 🔍 Recent Projects */}
+        
         <div className="bg-white mt-8 p-5 rounded shadow">
           <div className="flex flex-col md:flex-row justify-between items-center mb-4 gap-3">
             <h2 className="text-lg font-bold">Recent Projects</h2>

@@ -58,7 +58,7 @@ const Clients = () => {
   return (
     <div className="flex min-h-screen bg-slate-600">
 
-      {/* ✅ SIDEBAR */}
+      
       <div className="w-64 bg-gray-400 text-white p-5 hidden md:block">
         <h1 className="text-2xl font-bold mb-8">Dashboard</h1>
 
@@ -79,17 +79,17 @@ const Clients = () => {
         </ul>
       </div>
 
-      {/* ✅ MAIN CONTENT */}
+      
       <div className="flex-1">
 
-        {/* ✅ NAVBAR */}
+      
         <div className="bg-white shadow p-4 text-center text-xl font-bold">
           Clients
         </div>
 
         <div className="p-6">
 
-          {/* FORM */}
+          
           <div className="bg-white p-5 rounded-xl shadow">
             <h2 className="text-lg font-bold mb-4">
               {editId ? "Edit Client" : "Add Client"}
@@ -123,7 +123,7 @@ const Clients = () => {
             </form>
           </div>
 
-          {/* TABLE */}
+          
           <div className="bg-white mt-8 p-5 rounded-xl shadow overflow-x-auto">
             <h2 className="text-lg font-bold mb-4">All Clients</h2>
 
