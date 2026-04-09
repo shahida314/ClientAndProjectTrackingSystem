@@ -1,30 +1,32 @@
-javascript
 const express = require('express');
+const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const cors = require('cors');
-const connectDB = require('./config/db');
-const authRoutes = require('./routes/authRoutes');
 
-// ডটএনভ কনফিগ
 dotenv.config();
-
-// ডাটাবেস কানেক্ট
-connectDB();
 
 const app = express();
 
-// মিডলওয়্যার
-app.use(cors()); // এটি ফ্রন্টএন্ডকে ব্যাকএন্ডে রিকোয়েস্ট করার পারমিশন দেবে
-app.use(express.json()); // JSON ডাটা রিসিভ করার জন্য
+// 🔹 Direct DB connection এখানে
+const connectDB = async () => {
+  try {
+    const conn = await mongoose.connect(process.env.MONGO_URI);
+    console.log(`MongoDB Connected: ${conn.connection.host}`);
+  } catch (error) {
+    console.error(error.message);
+    process.exit(1);
+  }
+};
 
-// রাউটস
-app.use('/api/auth', authRoutes);
+// কল করো
+connectDB();
 
-// টেস্ট রাউট
+app.use(cors());
+app.use(express.json());
+
 app.get('/', (req, res) => {
   res.send('API is running...');
 });
 
 const PORT = process.env.PORT || 5000;
-
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
