@@ -1,21 +1,29 @@
-const Client = require("../models/Client");
-const Project = require("../models/Project");
 
-const getDashboard = async (req, res) => {
-  try {
-    const clients = await Client.find().limit(5);
-    const projects = await Project.find().limit(5);
+import User from "../Models/User.js"; // যদি প্রয়োজন হয়
+// আপনার প্রজেক্টের Client এবং Project মডেল ইম্পোর্ট করুন (যেমন: import Client from "../Models/Client.js";)
+import Client from "../Models/Client.js"; 
+import Project from "../Models/Project.js";
 
-    const stats = {
-      clients: await Client.countDocuments(),
-      active: await Project.countDocuments({ status: "Ongoing" }),
-      completed: await Project.countDocuments({ status: "Completed" }),
-    };
+export const getDashboardStats = async (req, res) => {
+    try {
+        // ডেটাবেস থেকে ডেটা ফেচ করা
+        const clients = await Client.find();
+        const projects = await Project.find();
 
-    res.json({ stats, clients, projects });
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
+        // স্ট্যাটাস ক্যালকুলেশন
+        const stats = {
+            clients: clients.length,
+            active: projects.filter(p => p.status === 'active').length,
+            completed: projects.filter(p => p.status === 'completed').length,
+        };
+
+        res.status(200).json({
+            success: true,
+            stats,
+            clients,
+            projects
+        });
+    } catch (error) {
+        res.status(500).json({ success: false, message: "Error fetching dashboard data" });
+    }
 };
-
-module.exports = { getDashboard };

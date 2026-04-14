@@ -1,32 +1,31 @@
-const express = require('express');
-const mongoose = require('mongoose');
-const dotenv = require('dotenv');
-const cors = require('cors');
-
-dotenv.config();
+import "dotenv/config";
+import express from "express";
+import cors from "cors";
+import connectDB from "./config/db.js";
+import authRoutes from "./routes/authRoutes.js";
+import dashboardRoutes from "./routes/dashboardRoutes.js";
+import clientRoutes from "./routes/clientRoutes.js";
 
 const app = express();
 
-// 🔹 Direct DB connection এখানে
-const connectDB = async () => {
-  try {
-    const conn = await mongoose.connect(process.env.MONGO_URI);
-    console.log(`MongoDB Connected: ${conn.connection.host}`);
-  } catch (error) {
-    console.error(error.message);
-    process.exit(1);
-  }
-};
-
-// কল করো
-connectDB();
-
-app.use(cors());
+// Middleware
+// server.js ফাইলে এটি খুঁজুন এবং এভাবে আপডেট করুন
+app.use(cors({
+    origin: ["http://localhost:5173", "http://localhost:5174"], // উভয় পোর্টই লিস্টে যোগ করুন
+    credentials: true
+}));
 app.use(express.json());
 
-app.get('/', (req, res) => {
-  res.send('API is running...');
-});
+// Database Connect
+connectDB();
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+// Routes
+app.use("/api/auth", authRoutes);
+app.use("/api/dashboard", dashboardRoutes);
+app.use("/api/clients", clientRoutes);
+
+// Test
+app.get("/", (req, res) => res.send(" Server is running"));
+
+const PORT = process.env.PORT || 5001;
+app.listen(PORT, () => console.log(` Server running on port ${PORT}`));

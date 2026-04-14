@@ -1,12 +1,9 @@
 import mongoose from "mongoose";
 
-const clientSchema = new mongoose.Schema(
-  {
-    name: { type: String, required: true },
-    email: String,
-    phone: String,
-  },
-  { timestamps: true }
-);
+const clientSchema = new mongoose.Schema({
+    name:  { type: String, required: true },
+    email: { type: String, required: true },
+}, { timestamps: true });
 
-export default mongoose.model("Client", clientSchema);
+const Client = mongoose.model("Client", clientSchema);
+export default Client;
