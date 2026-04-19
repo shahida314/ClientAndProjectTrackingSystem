@@ -12,9 +12,9 @@ const connectDB = async () => {
             family: 4,
             directConnection: false,
         });
-        console.log("✅ MongoDB Atlas Connected");
+        console.log(" MongoDB Atlas Connected");
     } catch (error) {
-        console.error("❌ DB Error:", error.message);
+        console.error(" DB Error:", error.message);
         process.exit(1);
     }
 };

@@ -1,6 +1,6 @@
 // src/assets/services/projectService.js
 
-const API_URL = "http://localhost:5001/api/projects";
+const API_URL = "https://clientandprojecttrackingsystem.onrender.com/api/projects";
 
 const getAuthHeaders = () => ({
   "Content-Type": "application/json",

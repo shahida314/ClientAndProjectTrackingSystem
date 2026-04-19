@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API = "http://localhost:5001/api/clients";
+const API = "https://clientandprojecttrackingsystem.onrender.com/api/clients";
 
 const getAuthHeader = () => ({
     headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
