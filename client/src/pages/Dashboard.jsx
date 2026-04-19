@@ -19,7 +19,7 @@ const Dashboard = () => {
   const fetchDashboard = async () => {
   try {
     const token = localStorage.getItem("token");
-    const res = await axios.get("http://localhost:5001/api/dashboard", {
+    const res = await axios.get("https://clientandprojecttrackingsystem.onrender.com/api/dashboard", {
       headers: { Authorization: `Bearer ${token}` }
     });
     

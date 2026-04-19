@@ -33,7 +33,7 @@ const Clients = () => {
     if (!config) return navigate("/login"); // টোকেন না থাকলে লগইনে পাঠাবে
 
     try {
-      const res = await axios.get("http://localhost:5001/api/clients", config);
+      const res = await axios.get("https://clientandprojecttrackingsystem.onrender.com/api/clients", config);
       setClients(res.data);
     } catch (err) {
       console.error("Fetch error:", err.response?.data);
@@ -52,11 +52,11 @@ const Clients = () => {
     try {
       if (editId) {
         // আপডেট (PUT)
-        await axios.put(`http://localhost:5001/api/clients/${editId}`, clientData, config);
+        await axios.put(`https://clientandprojecttrackingsystem.onrender.com/api/clients/${editId}`, clientData, config);
         setEditId(null);
       } else {
         // তৈরি (POST)
-        await axios.post("http://localhost:5001/api/clients", clientData, config);
+        await axios.post("https://clientandprojecttrackingsystem.onrender.com/api/clients", clientData, config);
       }
       
       setName("");
@@ -72,7 +72,7 @@ const Clients = () => {
   // ৪. ক্লায়েন্ট ডিলিট করা
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:5001/api/clients/${id}`, getAuthHeader());
+      await axios.delete(`https://clientandprojecttrackingsystem.onrender.com/api/clients/${id}`, getAuthHeader());
       setDeleteConfirm(null);
       fetchClients();
     } catch (err) {
