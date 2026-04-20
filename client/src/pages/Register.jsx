@@ -217,7 +217,7 @@ const Register = () => {
         <div className="orb2" style={{ width: 160, height: 160, top: "40%", left: 30, background: "radial-gradient(circle,rgba(139,92,246,0.22) 0%,transparent 70%)", animation: "float2 14s ease-in-out infinite" }} />
 
         {/* Top nav */}
-        <div style={{ position: "absolute", top: 0, left: 0, right: 0, display: "flex", justifyContent: "space-between", alignItems: "center", padding: "16px 24px" }}>
+        <div style={{ position: "absolute", top: 0, left: 0, right: 0, display: "flex", justifyContent: "space-between", alignItems: "center", padding: "16px 24px", zIndex: 10 }}>
           <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
             <div style={{ width: 30, height: 30, borderRadius: 8, background: "linear-gradient(135deg,#059669,#0ea5e9)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 14 }}>⚡</div>
             <span style={{ color: "#fff", fontWeight: 700, fontSize: 14 }}>TrackProject</span>
