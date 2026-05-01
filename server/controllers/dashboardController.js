@@ -14,7 +14,7 @@ export const getDashboardStats = async (req, res) => {
     clients: clients.length,
     active: projects.filter(p => p.status === 'Ongoing').length,
     completed: projects.filter(p => p.status === 'Completed').length,
-    pending: projects.filter(p => p.status === 'Pending').length,  // ✅ নতুন
+    pending: projects.filter(p => p.status === 'Pending').length,  
 };
 
 res.status(200).json({

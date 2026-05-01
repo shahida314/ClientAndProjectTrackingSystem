@@ -15,7 +15,7 @@ router.get("/", protect, async (req, res) => {
 
 router.post("/", protect, async (req, res) => {
   try {
-    const { name, clientName, deadline, status } = req.body; // ✅ frontend এর সাথে match
+    const { name, clientName, deadline, status } = req.body; 
 
     if (!name || !clientName) {
       return res.status(400).json({ message: "Name and Client name required" });

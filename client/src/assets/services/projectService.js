@@ -1,4 +1,4 @@
-// src/assets/services/projectService.js
+
 
 const API_URL = "https://clientandprojecttrackingsystem.onrender.com/api/projects";
 
